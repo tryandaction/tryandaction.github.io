@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haokun Fu — Physics @ SUSTech</title>
+<style>
+  :root {
+    --navy: #1a3a5c;
+    --blue: #2563a8;
+    --blue-light: #3b82c4;
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #21262d;
+    --text: #e6edf3;
+    --text2: #8b949e;
+    --text3: #6e7681;
+    --border: #30363d;
+    --accent: #58a6ff;
+    --accent2: #1f6feb;
+    --green: #3fb950;
+    --tag-bg: #1f3a5c;
+    --tag-text: #79b8ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13,17,23,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-weight: 600; font-size: 15px; color: var(--text);
+    text-decoration: none; letter-spacing: 0.3px;
+  }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--text2); text-decoration: none; font-size: 13px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 80px 2rem 4rem;
+    background: radial-gradient(ellipse at 20% 50%, rgba(26,58,92,0.3) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(37,99,168,0.15) 0%, transparent 50%);
+  }
+  .hero-inner {
+    max-width: 760px; width: 100%;
+    display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
+  }
+  .hero-eyebrow {
+    font-size: 12px; font-weight: 500; letter-spacing: 1.5px;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 0.75rem;
+  }
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700; line-height: 1.15;
+    color: var(--text); margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+  }
+  .hero-sub {
+    font-size: 16px; color: var(--text2); margin-bottom: 1.25rem;
+  }
+  .hero-desc {
+    font-size: 14px; color: var(--text2); line-height: 1.8;
+    margin-bottom: 1.5rem; max-width: 500px;
+  }
+  .hero-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px; border-radius: 6px; font-size: 13px;
+    font-weight: 500; text-decoration: none; transition: all 0.2s;
+    cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: var(--accent2); color: #fff;
+  }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-outline {
+    background: transparent; color: var(--text2);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); background: rgba(88,166,255,0.05); }
+
+  .avatar {
+    width: 140px; height: 140px; border-radius: 50%;
+    border: 2px solid var(--border);
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem; font-weight: 700; color: rgba(255,255,255,0.9);
+    letter-spacing: -1px; flex-shrink: 0;
+  }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .section-inner { max-width: 760px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-size: 1.6rem; font-weight: 700; color: var(--text);
+    margin-bottom: 2rem; letter-spacing: -0.3px;
+  }
+  .divider {
+    border: none; border-top: 1px solid var(--border); margin: 0;
+  }
+
+  /* RESEARCH */
+  .research-bg { background: var(--bg2); }
+  .pub-card {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.25rem 1.5rem; margin-bottom: 1rem;
+    border-left: 3px solid var(--accent2);
+  }
+  .pub-meta { font-size: 12px; color: var(--text3); margin-bottom: 0.4rem; }
+  .pub-title {
+    font-size: 15px; font-weight: 600; color: var(--text);
+    margin-bottom: 0.4rem; line-height: 1.5;
+  }
+  .pub-authors { font-size: 13px; color: var(--text2); margin-bottom: 0.75rem; }
+  .pub-authors strong { color: var(--accent); }
+  .badge {
+    display: inline-block; padding: 2px 10px; border-radius: 20px;
+    font-size: 11px; font-weight: 500; margin-right: 6px;
+  }
+  .badge-blue { background: rgba(37,99,168,0.25); color: var(--accent); border: 1px solid rgba(88,166,255,0.3); }
+  .badge-green { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+
+  /* EXPERIENCE */
+  .exp-item { margin-bottom: 2.5rem; }
+  .exp-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 0.25rem; gap: 1rem;
+  }
+  .exp-title { font-size: 15px; font-weight: 600; color: var(--text); }
+  .exp-date { font-size: 12px; color: var(--text3); white-space: nowrap; flex-shrink: 0; }
+  .exp-org { font-size: 13px; color: var(--accent); margin-bottom: 0.75rem; }
+  .exp-bullets { list-style: none; padding: 0; }
+  .exp-bullets li {
+    font-size: 13px; color: var(--text2); line-height: 1.7;
+    padding: 3px 0 3px 1rem; position: relative;
+  }
+  .exp-bullets li::before {
+    content: '–'; position: absolute; left: 0; color: var(--text3);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+  }
+  .proj-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.25rem 1.5rem;
+    text-decoration: none; display: block;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .proj-card:hover {
+    border-color: var(--accent2); transform: translateY(-2px);
+  }
+  .proj-icon { font-size: 20px; margin-bottom: 0.75rem; }
+  .proj-name { font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 0.4rem; }
+  .proj-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 0.75rem; }
+  .proj-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag {
+    background: var(--tag-bg); color: var(--tag-text);
+    font-size: 11px; padding: 2px 8px; border-radius: 20px;
+  }
+
+  /* SKILLS */
+  .skills-bg { background: var(--bg2); }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .skill-group {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1rem 1.25rem;
+  }
+  .skill-label {
+    font-size: 11px; font-weight: 600; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 0.5rem;
+  }
+  .skill-items { font-size: 13px; color: var(--text2); line-height: 1.9; }
+
+  /* CONTACT */
+  .contact-row {
+    display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 2rem;
+    font-size: 12px; color: var(--text3);
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .avatar { width: 90px; height: 90px; font-size: 1.8rem; justify-self: start; order: -1; }
+    .exp-header { flex-direction: column; }
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Haokun Fu</a>
+  <ul class="nav-links">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="index_zh.html">中文</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Physics Undergraduate · SUSTech</div>
+      <h1>Haokun Fu<br><span style="color:var(--text2);font-size:0.6em;font-weight:400;letter-spacing:0;">付皓坤</span></h1>
+      <p class="hero-sub">Quantum Physics · AMO · Quantum Computing</p>
+      <p class="hero-desc">
+        I'm an undergraduate physicist at Southern University of Science and Technology (SUSTech), Shenzhen.
+        My research interests center on <strong style="color:var(--text);font-weight:500;">neutral atom quantum computing</strong>,
+        with a focus on quantum error correction, fault-tolerant protocols, and experimental implementation.
+        Currently working on Rydberg atom-based THz dark matter detection — co-first author on an upcoming
+        <em>Physical Review Letters</em> submission.
+      </p>
+      <div class="hero-links">
+        <a class="btn btn-primary" href="https://arxiv.org/abs/2603.23337" target="_blank">arXiv:2603.23337</a>
+        <a class="btn btn-outline" href="https://github.com/tryandaction" target="_blank">GitHub</a>
+        <a class="btn btn-outline" href="mailto:tryandaction@gmail.com">Email</a>
+      </div>
+    </div>
+    <div class="avatar">HF</div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- RESEARCH -->
+<section class="research-bg" id="research">
+  <div class="section-inner">
+    <div class="section-label">Research</div>
+    <h2>Publications & Experience</h2>
+
+    <div class="pub-card">
+      <div class="pub-meta">Preprint · 2025</div>
+      <div class="pub-title">THz Dark Matter Detection through Up-Conversion using Rydberg Atoms</div>
+      <div class="pub-authors"><strong>Haokun Fu</strong> et al.</div>
+      <span class="badge badge-blue">arXiv:2603.23337</span>
+      <span class="badge badge-green">Under review · PRL</span>
+      <span class="badge" style="background:rgba(168,85,247,0.15);color:#c084fc;border:1px solid rgba(192,132,252,0.3);">Co-first author</span>
+    </div>
+
+    <div style="margin-top: 2.5rem;">
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">THz Dark Matter Detection with Rydberg Atoms</div>
+          <div class="exp-date">2024 – Present</div>
+        </div>
+        <div class="exp-org">Undergraduate Researcher · SUSTech</div>
+        <ul class="exp-bullets">
+          <li>Surveyed Rydberg atom-based approaches for dark matter detection</li>
+          <li>Co-developed the experimental architecture and theoretical proposal for THz-band dark matter detection</li>
+          <li>Performed COMSOL simulations of dielectric cavities for dark matter–photon conversion, with parameter optimization and key figure-of-merit calculation</li>
+          <li>Contributed to designing a six-wave mixing scheme for THz-to-optical up-conversion; implemented and optimized the numerical code</li>
+          <li>Participated in building a system-level model to analyze signal efficiency, noise budget, and detection sensitivity limits</li>
+          <li>Led manuscript preparation as co-first author, targeting Physical Review Letters</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">Shenzhen International Quantum Academy</div>
+          <div class="exp-date">Winter 2024 & Summer/Winter 2025</div>
+        </div>
+        <div class="exp-org">Research Intern</div>
+        <ul class="exp-bullets">
+          <li>Built and optimized optical systems including fiber coupling, double-pass AOM, and injection-locking configurations</li>
+          <li>End-to-end design and assembly of two diode laser systems: SolidWorks modeling → custom fabrication → circuit integration → assembly, alignment, and testing</li>
+          <li>Participated in MOT optical system construction and alignment</li>
+          <li>Designed and fabricated signal amplifiers (schematic design, soldering, and system integration)</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">Cold Atom Interferometry for Gravitational Wave Detection</div>
+          <div class="exp-date">2024</div>
+        </div>
+        <div class="exp-org">Research Project</div>
+        <ul class="exp-bullets">
+          <li>Investigated the feasibility and key technical approaches of cold atom interferometers for gravitational wave detection</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: 2.5rem;">
+      <div class="section-label" style="margin-bottom: 1rem;">ACADEMIC & RESEARCH INITIATIVES</div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">IE Club — Founder</div>
+          <div class="exp-date">2023 – 2025</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Founded an interdisciplinary academic platform spanning physics, AI, and engineering</li>
+          <li>Organized reading groups, seminars, lectures, and cross-field research collaborations</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-title">Nanke Xingchen (南科星辰) — Founder</div>
+          <div class="exp-date">2024 – Present</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Established a science education company integrating scientific inquiry with social practice</li>
+          <li>Built partnerships with Shenzhen Astronomical Observatory, Xichong Dark Sky Planetarium, and local communities</li>
+          <li>Designed science curricula balancing conceptual knowledge and hands-on inquiry (astronomy and related fields)</li>
+          <li>Led the team in multiple entrepreneurship competitions and public outreach projects</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">Projects</div>
+    <h2>Open Source</h2>
+    <div class="projects-grid">
+
+      <a class="proj-card" href="https://github.com/tryandaction/lattice" target="_blank">
+        <div class="proj-icon">⚛️</div>
+        <div class="proj-name">Lattice</div>
+        <div class="proj-desc">Local-first research workbench integrating PDF annotation, Markdown live preview, handwritten notes, Jupyter Notebook support, and AI Agent capabilities.</div>
+        <div class="proj-tags"><span class="tag">Python</span><span class="tag">Quantum</span><span class="tag">Physics</span></div>
+      </a>
+
+      <a class="proj-card" href="https://github.com/tryandaction/english-coach" target="_blank">
+        <div class="proj-icon">🦞</div>
+        <div class="proj-name">English Coach</div>
+        <div class="proj-desc">An unconventional English learning tool — built with an active and engaging approach to language acquisition.</div>
+        <div class="proj-tags"><span class="tag">Python</span><span class="tag">NLP</span><span class="tag">Education</span></div>
+      </a>
+
+      <a class="proj-card" href="https://github.com/tryandaction/Interactive-Optics-Lab" target="_blank">
+        <div class="proj-icon">🔬</div>
+        <div class="proj-name">OpticsLab</div>
+        <div class="proj-desc">Publication-ready optical diagramming and simulation system for researchers. Supports 94+ optical elements, dual-mode workflow, and 300DPI+ professional export.</div>
+        <div class="proj-tags"><span class="tag">Python</span><span class="tag">Optics</span><span class="tag">Simulation</span></div>
+      </a>
+
+      <a class="proj-card" href="https://tryandaction.github.io" target="_blank">
+        <div class="proj-icon">📚</div>
+        <div class="proj-name">Reference Manager Pro</div>
+        <div class="proj-desc">VS Code extension for LaTeX users featuring intelligent reference repair, quality validation, and rollback mechanisms.</div>
+        <div class="proj-tags"><span class="tag">TypeScript</span><span class="tag">LaTeX</span><span class="tag">VS Code</span></div>
+      </a>
+
+      <a class="proj-card" href="https://github.com/tryandaction/formula-ocr" target="_blank">
+        <div class="proj-icon">📐</div>
+        <div class="proj-name">Physics Formula OCR</div>
+        <div class="proj-desc">Web application for converting image formulas to LaTeX. Supports full-page formula recognition and multi-format output.</div>
+        <div class="proj-tags"><span class="tag">Python</span><span class="tag">OCR</span><span class="tag">LaTeX</span></div>
+      </a>
+
+      <a class="proj-card" href="https://github.com/tryandaction/ieclub_dev" target="_blank">
+        <div class="proj-icon">🧪</div>
+        <div class="proj-name">IE Club Platform</div>
+        <div class="proj-desc">Interdisciplinary campus academic exchange platform with topic forums, community groups, personal profiles, and intelligent matching.</div>
+        <div class="proj-tags"><span class="tag">Web</span><span class="tag">Community</span><span class="tag">Academic</span></div>
+      </a>
+
+      <a class="proj-card" href="https://github.com/tryandaction/bottleup" target="_blank">
+        <div class="proj-icon">🍾</div>
+        <div class="proj-name">BottleUp</div>
+        <div class="proj-desc">Healing anonymous emotional expression social app. "Message in a bottle" mode designed for Gen Z's emotional release needs.</div>
+        <div class="proj-tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Social</span></div>
+      </a>
+
+      <a class="proj-card" href="https://github.com/tryandaction/sciquest" target="_blank">
+        <div class="proj-icon">🔭</div>
+        <div class="proj-name">SciQuest</div>
+        <div class="proj-desc">Duolingo-style science education platform. Gamified learning experience making science accessible and engaging.</div>
+        <div class="proj-tags"><span class="tag">React</span><span class="tag">Education</span><span class="tag">Gamification</span></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section class="skills-bg" id="skills">
+  <div class="section-inner">
+    <div class="section-label">Skills</div>
+    <h2>Technical</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-label">Programming</div>
+        <div class="skill-items">Python<br>MATLAB</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-label">Tools</div>
+        <div class="skill-items">LaTeX<br>Git</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-label">Simulation</div>
+        <div class="skill-items">COMSOL Multiphysics<br>Zemax (basic)</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-label">Experimental</div>
+        <div class="skill-items">Laser systems<br>Optical alignment<br>Injection locking<br>AOM / EOM<br>MOT optics<br>Saturated absorption spectroscopy<br>Signal acquisition</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-label">Engineering</div>
+        <div class="skill-items">SolidWorks<br>CAD (basic)</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-label">Languages</div>
+        <div class="skill-items">Chinese (Native)<br>English (Fluent)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Contact</div>
+    <h2>Get in touch</h2>
+    <p style="color:var(--text2);font-size:14px;max-width:480px;">
+      I'm always happy to discuss physics, research collaborations, or just exchange ideas.
+      Feel free to reach out by email or explore my work on GitHub.
+    </p>
+    <div class="contact-row">
+      <a class="btn btn-primary" href="mailto:tryandaction@gmail.com">tryandaction@gmail.com</a>
+      <a class="btn btn-outline" href="https://github.com/tryandaction" target="_blank">github.com/tryandaction</a>
+      <a class="btn btn-outline" href="https://arxiv.org/abs/2603.23337" target="_blank">arXiv</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Haokun Fu · SUSTech · Shenzhen, China · 2025</p>
+</footer>
+
+</body>
+</html>
