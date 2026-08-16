@@ -174,7 +174,7 @@
       <p class="hero-desc">
         南方科技大学物理系本科生，研究兴趣聚焦于<strong style="color:var(--text);font-weight:500;">中性原子量子计算</strong>，
         尤其关注基于 Yb 原子的量子纠错、容错协议及实验实现。目前在太一量生担任理论研究实习生，
-        从事中性 <sup>171</sup>Yb 原子单比特与两比特门理论研究。
+        从事中性 <sup>171</sup>Yb 原子量子门设计与鲁棒性优化研究。
       </p>
       <div class="hero-links">
         <a class="btn btn-primary" href="https://arxiv.org/abs/2603.23337" target="_blank">arXiv:2603.23337</a>
@@ -213,9 +213,10 @@
         </div>
         <div class="exp-org">理论研究实习生</div>
         <ul class="exp-bullets">
-          <li>构建中性 <sup>171</sup>Yb 原子单比特与两比特门的完整计算链路，涵盖原子能级、有效哈密顿量、开放系统误差模型、脉冲优化、鲁棒性评估及保真度/泄漏分析</li>
+          <li>构建中性 <sup>171</sup>Yb 原子量子门的完整计算链路，涵盖原子能级、有效哈密顿量、开放系统误差模型、最优控制理论、脉冲优化、鲁棒性评估及保真度/泄漏分析</li>
           <li>复现 <sup>171</sup>Yb 单比特 Raman 门在弱驱动与强驱动（Jenkins）方案下的理论，并结合实验约束提出可部署的单比特门实施方案</li>
-          <li>迭代优化 benchmark 及鲁棒两比特 Rydberg 纠缠门——含时间最优 CZ、GRAPE 优化 AR-CZ（擦除转换）、AR/DR/ADR 门——融入 Lindblad 衰减、有限阻塞效应、Doppler/振幅噪声及运动平均效应</li>
+          <li>迭代优化 benchmark 及鲁棒 Rydberg 纠缠门——含时间最优 CZ、GRAPE 优化 AR-CZ（擦除转换）、AR/DR/ADR 门——融入 Lindblad 衰减、有限阻塞效应、Doppler/振幅噪声及运动平均效应，并将框架扩展至三比特等多比特操作</li>
+          <li>设计自定义损失函数，并采用低秩 Hessian 优化方法加速高保真度中性原子门的设计优化</li>
           <li>撰写开源教育网站 <a href="https://github.com/tryandaction/neutral-yb-atlas" target="_blank" style="color:var(--accent);">Neutral Yb Atlas</a>，系统讲解中性 <sup>171</sup>Yb 量子计算（能级、编码与门机制）</li>
         </ul>
       </div>
@@ -315,7 +316,7 @@
       <a class="proj-card" href="https://github.com/tryandaction/neutral-yb-atlas" target="_blank">
         <div class="proj-icon">🧭</div>
         <div class="proj-name">Neutral Yb Atlas</div>
-        <div class="proj-desc">中性 <sup>171</sup>Yb 量子计算教育网站，系统讲解原子能级、核自旋编码及单/两比特门机制。</div>
+        <div class="proj-desc">中性 <sup>171</sup>Yb 量子计算教育网站，系统讲解原子能级、核自旋编码及量子门机制。</div>
         <div class="proj-tags"><span class="tag">量子</span><span class="tag">教育</span><span class="tag">Yb</span></div>
       </a>
 
